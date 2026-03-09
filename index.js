@@ -4,6 +4,9 @@ const { chromium } = require('playwright');
 const ffmpegPath = require('ffmpeg-static');
 const { execSync } = require('child_process');
 
+
+let videoDuration = 9000; // 9 segundos
+
 (async () => {
   try {
     const directoryPath = __dirname;
@@ -32,8 +35,8 @@ const { execSync } = require('child_process');
 
       // Criar contexto com gravação
       const context = await browser.newContext({
-        recordVideo: { dir: tempVideoDir },
-        viewport: { width: 1280, height: 720 }
+        recordVideo: { dir: tempVideoDir, size: { width: 1920, height: 1080 } },
+        viewport: { width: 1920, height: 1080 }
       });
 
       const page = await context.newPage();
@@ -44,7 +47,7 @@ const { execSync } = require('child_process');
       await page.waitForLoadState('networkidle');
 
       // Tempo de gravação (5 segundos)
-      await page.waitForTimeout(5000);
+      await page.waitForTimeout(videoDuration);
 
       await context.close(); // Finaliza gravação
 
