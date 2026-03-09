@@ -5,7 +5,7 @@ const ffmpegPath = require('ffmpeg-static');
 const { execSync } = require('child_process');
 
 
-let videoDuration = 9000; // 9 segundos
+let videoDuration = 5000; //  define o tempo de video
 
 (async () => {
   try {
